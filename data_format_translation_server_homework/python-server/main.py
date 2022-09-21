@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from bs4 import BeautifulSoup
 import csv
 import yaml
-
+import json
+import xmltodict
 app = FastAPI()
 xmlParser = BeautifulSoup()
 @app.get("/csvRoute")
@@ -32,7 +33,9 @@ def _():
 def _():
 
     with open('birds.xml', 'r') as f:
-        data = f.read()
+        data_dict = xmltodict.parse(f.read())
+        json_data = json.dumps(data_dict)
         print('XML')
-        print(data)
+        print(json_data)
+        data= json.loads(json_data)
     return {"ReturnData":data}
