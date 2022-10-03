@@ -6,7 +6,11 @@ import json
 import xmltodict
 app = FastAPI()
 xmlParser = BeautifulSoup()
-@app.get("/csvRoute")
+@app.get("/csvRoute",responses={
+    200:{
+        "description":"Returns the contents of the CSV file birds.csv"
+    }
+})
 def _():
     with open('birds.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
@@ -17,7 +21,11 @@ def _():
         print(a)
     return {"ReturnData":a}
 
-@app.get("/yamlRoute")
+@app.get("/yamlRoute",responses={
+    200:{
+        "description":"Returns the contents of the YAML file birds.yaml"
+    }
+})
 def _():
     with open('birds.yaml','r') as stream:
         try:
@@ -29,7 +37,14 @@ def _():
             return {"error":FALSE}
     return {"ReturnData":returnValues}
 
-@app.get("/xmlRoute")
+@app.get("/xmlRoute",responses={
+    200:{
+        "description":"Returns the contents of the XML file birds.xml",
+        "example":{
+            "name":"Freckles"
+        }
+    }
+})
 def _():
 
     with open('birds.xml', 'r') as f:

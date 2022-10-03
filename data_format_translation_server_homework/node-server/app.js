@@ -1,11 +1,18 @@
 const express =require('express');
 const fs = require('fs');
 const app = express();
-
+const swaggerUi = require('swagger-ui-express')
+swaggerDocument = require('./swagger.json');
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port`, PORT);
 });
+app.use(
+    '/api-docs',
+    swaggerUi.serve, 
+    swaggerUi.setup(swaggerDocument)
+  );
+
 app.get("/txtRoute", (req, res) =>
 { 
     const txtData = JSON.parse(fs.readFileSync('birds.txt','utf8'));

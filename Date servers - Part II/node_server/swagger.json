@@ -1,0 +1,77 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "My User Project CRUD",
+      "description": "My User Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Data format translation Node ",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+          "/timestamp":{
+            "get": {
+              "tags": ["Timestamp"],
+              "summary": "Gives a timestamp from this server in ISO format",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/timestamp"
+                  }
+                }
+              }
+            }
+          },
+          "/requestTimestamp": {
+            "get": {
+              "tags": ["Request Timestamp"],
+              "summary": "Requests and returns a timestamp from a python server",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/timestamp"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "definitions": {
+          "timestamp": {
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format":"date-time",
+                "description": "Current date and time in ISO format"
+              },
+              "format": {
+                "type":"string",
+                "description": "Says the format of the date object that is returned",
+                "value": "ISO format"
+              }
+
+
+  
+          },
+          
+          "Timestamp": {
+            "type": "array",
+            "$ref": "#/definitions/timestamp"
+          }
+        }
+      }
+}
